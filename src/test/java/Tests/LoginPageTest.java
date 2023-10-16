@@ -6,6 +6,9 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class LoginPageTest extends BaseTest {
+    String validUsername;
+    String validPassword;
+
 
     @BeforeMethod
     public void pageSetUp(){
@@ -29,8 +32,8 @@ public class LoginPageTest extends BaseTest {
     @Test(priority = 10)
     public void verifyLogInWithValidCredentials(){
 
-        String validUsername = excelReader.getStringData("LoginData",1,1);
-        String validPassword = excelReader.getStringData("LoginData",1,2);
+        validUsername = excelReader.getStringData("LoginData",1,1);
+        validPassword = excelReader.getStringData("LoginData",1,2);
 
         login(validUsername,validPassword);
 
@@ -44,6 +47,19 @@ public class LoginPageTest extends BaseTest {
         Assert.assertEquals(driver.getCurrentUrl(), URL);
 
     }
+    @Test(priority = 20)
+    public void verifyLogInWithValidUsernameAndInvalidPassword(){
+        login(validUsername, "InvalidPassword");
+        errorMessage();
+    }
+    @Test(priority = 25)
+    public void verifyLogInWithValidPasswordAndInvalidUsername(){
+        login("InvalidUsername", validPassword);
+        errorMessage();
+    }
+
+
+
 
     public void login(String username,String password){
         loginPage.enterUsername(username);
@@ -58,16 +74,18 @@ public class LoginPageTest extends BaseTest {
             String invalidPassword = excelReader.getStringData(sheetName, i, 4);
 
             login(invalidUsername, invalidPassword);
-
-            // Message for invalid input/ error is shown
-            Assert.assertTrue(loginPage.errorMessage.isDisplayed());
-
-            // Button to close message is shown and enabled
-            Assert.assertTrue(loginPage.errorButton.isDisplayed());
-            Assert.assertTrue(loginPage.errorButton.isEnabled());
-
-            loginPage.clickOnErrorButton();
+            errorMessage();
         }
+    }
+    public void errorMessage(){
+        // Message for invalid input/ error is shown
+        Assert.assertTrue(loginPage.errorMessage.isDisplayed());
+
+        // Button to close message is shown and enabled
+        Assert.assertTrue(loginPage.errorButton.isDisplayed());
+        Assert.assertTrue(loginPage.errorButton.isEnabled());
+
+        loginPage.clickOnErrorButton();
     }
 
 
