@@ -1,10 +1,9 @@
 package Tests;
 
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class ProductsPageTest extends LoginPageTest {
+public class HomepageTest extends LoginPageTest {
     @Test
     public void verifyIfPageElementsAreVisible(){
 

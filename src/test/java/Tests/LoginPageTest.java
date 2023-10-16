@@ -6,9 +6,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class LoginPageTest extends BaseTest {
-    String validUsername;
-    String validPassword;
-
 
     @BeforeMethod
     public void pageSetUp(){
@@ -19,7 +16,7 @@ public class LoginPageTest extends BaseTest {
     // TODO -> TESTING -----------------------------------------------------------------
 
     @Test(priority = 5)
-    public void verifyPageElementsArePresent(){
+    public void pageElementsArePresent(){
 
         // Submit button
         Assert.assertTrue(loginPage.loginButton.isDisplayed());
@@ -37,7 +34,7 @@ public class LoginPageTest extends BaseTest {
 
     }
     @Test(priority = 10)
-    public void verifyLogInWithValidCredentials(){
+    public void userCanLoginWithValidCredentials(){
 
         validLogin("LoginData");
 
@@ -45,18 +42,18 @@ public class LoginPageTest extends BaseTest {
         Assert.assertEquals(driver.getCurrentUrl(), expectedURL);
     }
     @Test(priority = 15)
-    public void verifyLogInWithInvalidValues(){
+    public void userCannotLoginWithInvalidValues(){
 
         invalidLogin("LoginData");
         Assert.assertEquals(driver.getCurrentUrl(), URL);
 
     }
     @Test(priority = 20)
-    public void verifyLogInWithValidUsernameAndInvalidPassword(){
+    public void userCannotLoginWithInvalidPassword(){
         invalidPasswordLogin("LoginData");
     }
     @Test(priority = 25)
-    public void verifyLogInWithInvalidUsernameAndValidPassword(){
+    public void userCannotLoginWithInvalidUsername(){
         invalidUsernameLogin("LoginData");
     }
 
@@ -91,7 +88,6 @@ public class LoginPageTest extends BaseTest {
             errorMessage();
         }
     }
-
     public void invalidUsernameLogin(String sheetName){
 
         String validPassword = excelReader.getStringData(sheetName, 1, 2);
