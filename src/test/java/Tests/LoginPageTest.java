@@ -30,6 +30,11 @@ public class LoginPageTest extends BaseTest {
 
         // Username
         Assert.assertTrue(loginPage.passwordTextBox.isDisplayed());
+
+        // Login logo
+        Assert.assertTrue(loginPage.loginSiteLogoVisibility());
+        Assert.assertEquals(loginPage.getLoginSiteLogoText(), "Swag Labs");
+
     }
     @Test(priority = 10)
     public void verifyLogInWithValidCredentials(){
@@ -48,13 +53,11 @@ public class LoginPageTest extends BaseTest {
     }
     @Test(priority = 20)
     public void verifyLogInWithValidUsernameAndInvalidPassword(){
-        login(validUsername, "InvalidPassword");
-        errorMessage();
+        invalidPasswordLogin("LoginData");
     }
     @Test(priority = 25)
-    public void verifyLogInWithValidPasswordAndInvalidUsername(){
-        login("InvalidUsername", validPassword);
-        errorMessage();
+    public void verifyLogInWithInvalidUsernameAndValidPassword(){
+        invalidUsernameLogin("LoginData");
     }
 
     // TODO -> END OF TESTING ----------------------------------------------------------
@@ -85,6 +88,31 @@ public class LoginPageTest extends BaseTest {
             String invalidPassword = excelReader.getStringData(sheetName, i, 4);
 
             login(invalidUsername, invalidPassword);
+            errorMessage();
+        }
+    }
+
+    public void invalidUsernameLogin(String sheetName){
+
+        String validPassword = excelReader.getStringData(sheetName, 1, 2);
+
+        for (int i = 1; i < excelReader.getLastRow(sheetName); i++) {
+
+            String invalidUsername = excelReader.getStringData(sheetName, i, 3);
+
+            login(invalidUsername, validPassword);
+            errorMessage();
+        }
+    }
+    public void invalidPasswordLogin(String sheetName){
+
+        String validUsername = excelReader.getStringData(sheetName, 1, 1);
+
+        for (int i = 1; i < excelReader.getLastRow(sheetName); i++) {
+
+            String invalidPassword = excelReader.getStringData(sheetName, i, 4);
+
+            login(validUsername, invalidPassword);
             errorMessage();
         }
     }

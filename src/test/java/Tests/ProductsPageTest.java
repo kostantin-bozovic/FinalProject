@@ -1,10 +1,10 @@
 package Tests;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class ProductsPageTest extends LoginPageTest {
-
     @Test
     public void verifyIfPageElementsAreVisible(){
 
@@ -39,5 +39,4 @@ public class ProductsPageTest extends LoginPageTest {
         // SHOPPING CART - ICON
         Assert.assertTrue(productsPage.shoppingCartIcon());
     }
-
 }

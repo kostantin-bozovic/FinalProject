@@ -27,6 +27,10 @@ public class LoginPage extends BaseTest {
     @FindBy(className = "error-button")
     public WebElement errorButton;
 
+    @FindBy(className = "login_logo")
+    public WebElement loginSiteLogo;
+
+
     public void enterUsername(String username){
         usernameTextBox.clear();
         usernameTextBox.sendKeys(username);
@@ -43,5 +47,13 @@ public class LoginPage extends BaseTest {
 
     public void clickOnErrorButton(){
         errorButton.click();
+    }
+
+    public boolean loginSiteLogoVisibility(){
+        return loginSiteLogo.isDisplayed();
+    }
+
+    public String getLoginSiteLogoText(){
+        return loginSiteLogo.getText();
     }
 }
