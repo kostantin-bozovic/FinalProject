@@ -1,6 +1,7 @@
 package Base;
 
 import Pages.LoginPage;
+import Pages.ProductsPage;
 import Tests.LoginPageTest;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.JavascriptExecutor;
@@ -17,11 +18,11 @@ import java.time.Duration;
 public class BaseTest {
 
     public static final String URL = "https://www.saucedemo.com/";
-
     public static WebDriver driver;
     public WebDriverWait wait;
     public ExcelReader excelReader;
     public LoginPage loginPage;
+    public ProductsPage productsPage;
 
     @BeforeClass
     public void setUp() throws IOException {
@@ -33,6 +34,7 @@ public class BaseTest {
         excelReader = new ExcelReader("src/test/java/TestData.xlsx");
 
         loginPage = new LoginPage();
+        productsPage = new ProductsPage();
     }
 
     @AfterClass

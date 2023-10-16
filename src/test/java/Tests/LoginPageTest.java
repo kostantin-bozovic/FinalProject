@@ -16,6 +16,8 @@ public class LoginPageTest extends BaseTest {
         driver.navigate().to(URL);
     }
 
+    // TODO -> TESTING -----------------------------------------------------------------
+
     @Test(priority = 5)
     public void verifyPageElementsArePresent(){
 
@@ -32,10 +34,7 @@ public class LoginPageTest extends BaseTest {
     @Test(priority = 10)
     public void verifyLogInWithValidCredentials(){
 
-        validUsername = excelReader.getStringData("LoginData",1,1);
-        validPassword = excelReader.getStringData("LoginData",1,2);
-
-        login(validUsername,validPassword);
+        validLogin("LoginData");
 
         String expectedURL = "https://www.saucedemo.com/inventory.html";
         Assert.assertEquals(driver.getCurrentUrl(), expectedURL);
@@ -58,13 +57,25 @@ public class LoginPageTest extends BaseTest {
         errorMessage();
     }
 
-
-
+    // TODO -> END OF TESTING ----------------------------------------------------------
 
     public void login(String username,String password){
+
+        // Enter given values for username and password
         loginPage.enterUsername(username);
         loginPage.enterPassword(password);
+
+        // Click on Login button
         loginPage.clickOnLoginButton();
+    }
+    public void validLogin(String sheetName){
+
+        // Taking from TestData.xlsx file, values for Username and Password
+
+        String validUsername = excelReader.getStringData(sheetName,1,1);
+        String validPassword = excelReader.getStringData(sheetName,1,2);
+
+        login(validUsername,validPassword); // Entering values and clicking Login button
     }
     public void invalidLogin(String sheetName){
 
@@ -78,10 +89,10 @@ public class LoginPageTest extends BaseTest {
         }
     }
     public void errorMessage(){
-        // Message for invalid input/ error is shown
+        // Testing message for invalid input/error is displayed
         Assert.assertTrue(loginPage.errorMessage.isDisplayed());
 
-        // Button to close message is shown and enabled
+        // Testing button to close message
         Assert.assertTrue(loginPage.errorButton.isDisplayed());
         Assert.assertTrue(loginPage.errorButton.isEnabled());
 
