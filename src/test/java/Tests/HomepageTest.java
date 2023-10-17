@@ -140,11 +140,6 @@ public class HomepageTest extends BaseTest {
         }
     }
 
-    @Test
-    public void demoTesting(){
-
-    }
-
 
     public void emptyCart(){
         productsPage.clickOnShoppingCart();
@@ -206,22 +201,5 @@ public class HomepageTest extends BaseTest {
         }
 
     }
-    public void validLogin(String sheetName){
 
-        // Taking from TestData.xlsx file, values for Username and Password
-
-        String validUsername = excelReader.getStringData(sheetName,1,1);
-        String validPassword = excelReader.getStringData(sheetName,1,2);
-
-        login(validUsername,validPassword); // Entering values and clicking Login button
-    }
-    public void login(String username,String password){
-
-        // Enter given values for username and password
-        loginPage.enterUsername(username);
-        loginPage.enterPassword(password);
-
-        // Click on Login button
-        loginPage.clickOnLoginButton();
-    }
 }

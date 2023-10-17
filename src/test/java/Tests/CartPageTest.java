@@ -1,4 +1,6 @@
 package Tests;
 
-public class CartPageTest {
+import Base.BaseTest;
+
+public class CartPageTest extends BaseTest {
 }

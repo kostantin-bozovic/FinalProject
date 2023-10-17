@@ -31,6 +31,9 @@ public class LoginPage extends BaseTest {
     public WebElement loginSiteLogo;
 
 
+
+    // TODO -> Action -----------------------------------------------------------------
+
     public void enterUsername(String username){
         usernameTextBox.clear();
         usernameTextBox.sendKeys(username);

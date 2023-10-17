@@ -1,5 +1,6 @@
 package Base;
 
+import Pages.BurgerMenu;
 import Pages.LoginPage;
 import Pages.ProductsPage;
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -25,6 +26,8 @@ public class BaseTest {
     public ExcelReader excelReader;
     public LoginPage loginPage;
     public ProductsPage productsPage;
+    public BurgerMenu burgerMenu;
+
 
 
     @BeforeClass
@@ -38,6 +41,8 @@ public class BaseTest {
 
         loginPage = new LoginPage();
         productsPage = new ProductsPage();
+        burgerMenu = new BurgerMenu();
+
     }
 
     @AfterClass
@@ -48,5 +53,24 @@ public class BaseTest {
 
     public void scrollToElement(WebElement element){
         ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", element);
+    }
+
+    public void validLogin(String sheetName){
+
+        // Taking from TestData.xlsx file, values for Username and Password
+
+        String validUsername = excelReader.getStringData(sheetName,1,1);
+        String validPassword = excelReader.getStringData(sheetName,1,2);
+
+        login(validUsername,validPassword); // Entering values and clicking Login button
+    }
+    public void login(String username,String password){
+
+        // Enter given values for username and password
+        loginPage.enterUsername(username);
+        loginPage.enterPassword(password);
+
+        // Click on Login button
+        loginPage.clickOnLoginButton();
     }
 }

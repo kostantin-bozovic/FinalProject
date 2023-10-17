@@ -41,9 +41,13 @@ public class ProductsPage extends BaseTest {
     public List<WebElement> productNames;
 
 
+
+    // TODO -> Action -----------------------------------------------------------------
+
     public WebElement selectRandomProduct(){
         return driver.findElement(By.id("item_"+ randomNumberGenerator(6) +"_title_link"));
     }
+
     public boolean buttonIsHighlighted(WebElement button){
 
         // Checking if remove button is highlighted !!! // first click on button, then check highlight
@@ -52,6 +56,7 @@ public class ProductsPage extends BaseTest {
 
         return color.equals("rgba(226, 35, 26, 1)") && borderColor.equals("0.8px solid rgb(226, 35, 26)");
     }
+
     public void addRandomProducts(int numberOfProducts){
 
         List<Integer> listOfIndex = new ArrayList<>();
@@ -74,9 +79,11 @@ public class ProductsPage extends BaseTest {
     public void clickOnBackButton(){
         backButton.click();
     }
+
     public void clickOnAddToCartButton(){
         addToCartButton.click();
     }
+
     public int randomNumberGenerator(int size){ // vraca random index od 0 do product.size
         Random random = new Random();
         return random.nextInt(0,size);
@@ -85,27 +92,35 @@ public class ProductsPage extends BaseTest {
     public String getSiteLogoText(){
         return siteLogo.getText();
     }
+
     public String getPageTitle(){
         return pageTitle.getText();
     }
+
     public boolean dropdownMenu(){
         return sortingDropdownMenu.isDisplayed() && sortingDropdownMenu.isEnabled();
     }
+
     public boolean menuButtonIcon(){
         return menuButton.isDisplayed() && menuButton.isEnabled();
     }
+
     public boolean shoppingCartIcon(){
         return shoppingCart.isEnabled() && shoppingCart.isDisplayed();
     }
+
     public int getCartNumber(){
         return Integer.parseInt(shoppingCart.getText());
     }
+
     public void clickOnShoppingCart(){
         shoppingCart.click();
     }
+
     public void clickOnRemoveCartButton(){
         removeCartButton.click();
     }
+
     public void sortProducts(String by) {
         Select select = new Select(sortOptions);
 
@@ -116,6 +131,7 @@ public class ProductsPage extends BaseTest {
             case "lohi" -> select.selectByValue("lohi");
         }
     }
+
     public List<Double> collectAllPrices(){
         List<Double> listOfPrice = new ArrayList<>();
 
