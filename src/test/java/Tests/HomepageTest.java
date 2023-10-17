@@ -81,20 +81,70 @@ public class HomepageTest extends BaseTest {
     }
     @Test(priority = 30)
     public void sortProductsInAlphabeticOrder(){
+
         productsPage.sortProducts("az");
+
+        List<String> ascNameList = productsPage.collectProductNames();
+
+        for (int i = 0; i < ascNameList.size()-1; i++){
+
+            String first = ascNameList.get(i);
+            String second = ascNameList.get(i+1);
+
+            Assert.assertTrue(first.compareTo(second) <= 0);
+        }
     }
-    @Test(priority = 30)
+    @Test(priority = 35)
     public void sortProductsInAlphabeticDescOrder(){
+
         productsPage.sortProducts("za");
+
+        List<String> ascNameList = productsPage.collectProductNames();
+
+        for (int i = 0; i < ascNameList.size()-1; i++){
+
+            String first = ascNameList.get(i);
+            String second = ascNameList.get(i+1);
+
+            Assert.assertTrue(first.compareTo(second) >= 0);
+        }
     }
-    @Test(priority = 30)
+    @Test(priority = 40)
     public void sortProductsByPriceAscending(){
-        productsPage.sortProducts("hilo");
-    }
-    @Test(priority = 30)
-    public void sortProductsByPriceDesc(){
+
         productsPage.sortProducts("lohi");
+
+        List<Double> ascPriceList = productsPage.collectAllPrices();
+
+        for (int i = 0; i < ascPriceList.size()-1; i++){
+
+            double first = ascPriceList.get(i);
+            double second = ascPriceList.get(i+1);
+
+            Assert.assertTrue(first <= second);
+        }
     }
+    @Test(priority = 45)
+    public void sortProductsByPriceDesc(){
+
+        productsPage.sortProducts("hilo");
+
+        List<Double> ascPriceList = productsPage.collectAllPrices();
+
+        for (int i = 0; i < ascPriceList.size()-1; i++){
+
+            double first = ascPriceList.get(i);
+            double second = ascPriceList.get(i+1);
+
+            Assert.assertTrue(first >= second);
+        }
+    }
+
+    @Test
+    public void demoTesting(){
+
+    }
+
 
     public void emptyCart(){
         productsPage.clickOnShoppingCart();

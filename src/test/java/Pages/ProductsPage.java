@@ -35,16 +35,18 @@ public class ProductsPage extends BaseTest {
     public WebElement removeCartButton;
     @FindBy(className = "product_sort_container")
     public WebElement sortOptions;
-
+    @FindBy(className = "inventory_item_price")
+    public List<WebElement> productPrices;
+    @FindBy(className = "inventory_item_name")
+    public List<WebElement> productNames;
 
 
     public WebElement selectRandomProduct(){
         return driver.findElement(By.id("item_"+ randomNumberGenerator(6) +"_title_link"));
     }
-
-    // Checking if remove button is highlighted !!! // first click on button, then check highlight
     public boolean buttonIsHighlighted(WebElement button){
 
+        // Checking if remove button is highlighted !!! // first click on button, then check highlight
         String color = button.getCssValue("color");
         String borderColor = button.getCssValue("border");
 
@@ -75,7 +77,6 @@ public class ProductsPage extends BaseTest {
     public void clickOnAddToCartButton(){
         addToCartButton.click();
     }
-
     public int randomNumberGenerator(int size){ // vraca random index od 0 do product.size
         Random random = new Random();
         return random.nextInt(0,size);
@@ -114,5 +115,22 @@ public class ProductsPage extends BaseTest {
             case "hilo" -> select.selectByValue("hilo");
             case "lohi" -> select.selectByValue("lohi");
         }
+    }
+    public List<Double> collectAllPrices(){
+        List<Double> listOfPrice = new ArrayList<>();
+
+        for (WebElement element: productPrices){
+            listOfPrice.add(Double.parseDouble(element.getText().substring(1)));
+        }
+        return listOfPrice;
+    }
+
+    public List<String> collectProductNames(){
+        List<String> listOfNames = new ArrayList<>();
+
+        for (WebElement element: productNames){
+            listOfNames.add(element.getText());
+        }
+        return listOfNames;
     }
 }
