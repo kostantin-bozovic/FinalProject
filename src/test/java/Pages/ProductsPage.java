@@ -5,7 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.Assert;
+import org.openqa.selenium.support.ui.Select;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +33,8 @@ public class ProductsPage extends BaseTest {
     public WebElement backButton;
     @FindBy(css = ".btn.btn_secondary.btn_small.cart_button")
     public WebElement removeCartButton;
+    @FindBy(className = "product_sort_container")
+    public WebElement sortOptions;
 
 
 
@@ -100,8 +102,17 @@ public class ProductsPage extends BaseTest {
     public void clickOnShoppingCart(){
         shoppingCart.click();
     }
-
     public void clickOnRemoveCartButton(){
         removeCartButton.click();
+    }
+    public void sortProducts(String by) {
+        Select select = new Select(sortOptions);
+
+        switch (by) {
+            case "az" -> select.selectByValue("az");
+            case "za" -> select.selectByValue("za");
+            case "hilo" -> select.selectByValue("hilo");
+            case "lohi" -> select.selectByValue("lohi");
+        }
     }
 }

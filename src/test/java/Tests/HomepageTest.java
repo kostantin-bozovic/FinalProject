@@ -74,10 +74,26 @@ public class HomepageTest extends BaseTest {
         addOrRemoveProduct("add",randomProduct);
         addOrRemoveProduct("remove",randomProduct);
     }
-    @Test(priority = 100)
-    public void removeAllProductsFromShoppingCart(){
+    @Test(priority = 25)
+    public void userCanRemoveAllProductsFromShoppingCart(){
         productsPage.addRandomProducts(2);
         emptyCart();
+    }
+    @Test(priority = 30)
+    public void sortProductsInAlphabeticOrder(){
+        productsPage.sortProducts("az");
+    }
+    @Test(priority = 30)
+    public void sortProductsInAlphabeticDescOrder(){
+        productsPage.sortProducts("za");
+    }
+    @Test(priority = 30)
+    public void sortProductsByPriceAscending(){
+        productsPage.sortProducts("hilo");
+    }
+    @Test(priority = 30)
+    public void sortProductsByPriceDesc(){
+        productsPage.sortProducts("lohi");
     }
 
     public void emptyCart(){
