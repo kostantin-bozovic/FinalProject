@@ -5,7 +5,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
 import java.util.ArrayList;
@@ -30,15 +29,18 @@ public class ProductsPage extends BaseTest {
     public WebElement shoppingCart;
     @FindBy(className = "inventory_item_name")
     public List<WebElement> product;
-    @FindBy(css = ".btn.btn_primary.btn_small.btn_inventory") // zbog ovoga pada // prebrzo krece add !!!
+    @FindBy(css = ".btn.btn_primary.btn_small.btn_inventory")
     public WebElement addToCartButton;
-    @FindBy(id = "remove-sauce-labs-backpack")
-    public WebElement removeButton;
+//    @FindBy(css = "btn btn_secondary btn_small btn_inventory")
+//    public WebElement removeButton;
     @FindBy(id = "back-to-products")
     public WebElement backButton;
 
 
 
+    public WebElement selectRandomProduct(){
+        return driver.findElement(By.id("item_"+ randomNumberGenerator(6) +"_title_link"));
+    }
     // Checking if remove button is highlighted !!! // first click on button, then check highlight
     public boolean buttonIsHighlighted(WebElement button){
 
@@ -73,9 +75,9 @@ public class ProductsPage extends BaseTest {
     public void clickOnAddToCartButton(){
         addToCartButton.click();
     }
-    public void clickOnRemoveButton(){
-        removeButton.click();
-    }
+//    public void clickOnRemoveButton(){
+//        removeButton.click();
+//    }
     public int randomNumberGenerator(int size){ // vraca random index od 0 do product.size
         Random random = new Random();
         return random.nextInt(0,size);

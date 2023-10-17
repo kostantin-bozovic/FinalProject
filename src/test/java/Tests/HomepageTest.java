@@ -1,6 +1,8 @@
 package Tests;
 
 import Base.BaseTest;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -57,10 +59,48 @@ public class HomepageTest extends BaseTest {
 
     }
     @Test
-    public void UserCanAddProducts() {
-        productsPage.addRandomProducts(5);
+    public void userCanAddProducts() {
+        productsPage.addRandomProducts(2);
+    }
+    @Test
+    public void userCanAddAndRemoveProduct(){
+
+        WebElement randomProduct = productsPage.selectRandomProduct();
+
+        addOrRemoveProduct("add",randomProduct);
+        addOrRemoveProduct("remove",randomProduct);
     }
 
+
+
+
+    public void addOrRemoveProduct(String addOrRemove,WebElement element){
+
+        String productText = element.getText();
+        String idText;
+
+        if (addOrRemove.equals("add")) idText = "add to cart " + productText;
+        else idText = "remove " + productText;
+
+        idText = idText.replace(" ","-").toLowerCase();
+
+        WebElement button = driver.findElement(By.id(idText));
+
+        if (addOrRemove.equals("add")){
+            Assert.assertTrue(button.isDisplayed());
+            button.click();
+
+            Assert.assertEquals(productsPage.getCartNumber(), 1);
+
+        }else {
+            Assert.assertTrue(button.isDisplayed());
+            Assert.assertTrue(productsPage.buttonIsHighlighted(button));
+
+            button.click();
+            Assert.assertEquals(productsPage.shoppingCart.getText(), "");
+        }
+
+    }
     public void validLogin(String sheetName){
 
         // Taking from TestData.xlsx file, values for Username and Password
