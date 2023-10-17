@@ -27,20 +27,19 @@ public class ProductsPage extends BaseTest {
     public WebElement menuButton;
     @FindBy(id = "shopping_cart_container")
     public WebElement shoppingCart;
-    @FindBy(className = "inventory_item_name")
-    public List<WebElement> product;
     @FindBy(css = ".btn.btn_primary.btn_small.btn_inventory")
     public WebElement addToCartButton;
-//    @FindBy(css = "btn btn_secondary btn_small btn_inventory")
-//    public WebElement removeButton;
     @FindBy(id = "back-to-products")
     public WebElement backButton;
+    @FindBy(css = ".btn.btn_secondary.btn_small.cart_button")
+    public WebElement removeCartButton;
 
 
 
     public WebElement selectRandomProduct(){
         return driver.findElement(By.id("item_"+ randomNumberGenerator(6) +"_title_link"));
     }
+
     // Checking if remove button is highlighted !!! // first click on button, then check highlight
     public boolean buttonIsHighlighted(WebElement button){
 
@@ -58,6 +57,7 @@ public class ProductsPage extends BaseTest {
             int index = randomNumberGenerator(6);
 
             WebElement product = driver.findElement(By.id("item_"+index+"_title_link"));
+
             if (!listOfIndex.contains(index)){
                 listOfIndex.add(index);
                 product.click();
@@ -66,18 +66,14 @@ public class ProductsPage extends BaseTest {
             }
         }
     }
-    public String textWebElement(WebElement element){
-        return element.getText();
-    }
+
     public void clickOnBackButton(){
         backButton.click();
     }
     public void clickOnAddToCartButton(){
         addToCartButton.click();
     }
-//    public void clickOnRemoveButton(){
-//        removeButton.click();
-//    }
+
     public int randomNumberGenerator(int size){ // vraca random index od 0 do product.size
         Random random = new Random();
         return random.nextInt(0,size);
@@ -100,5 +96,12 @@ public class ProductsPage extends BaseTest {
     }
     public int getCartNumber(){
         return Integer.parseInt(shoppingCart.getText());
+    }
+    public void clickOnShoppingCart(){
+        shoppingCart.click();
+    }
+
+    public void clickOnRemoveCartButton(){
+        removeCartButton.click();
     }
 }

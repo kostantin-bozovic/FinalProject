@@ -7,6 +7,8 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.List;
+
 public class HomepageTest extends BaseTest {
 
     @BeforeMethod
@@ -15,7 +17,8 @@ public class HomepageTest extends BaseTest {
         driver.navigate().to(URL);
         validLogin("LoginData");
     }
-    @Test
+
+    @Test(priority = 5)
     public void pageElementsArePresent(){
 
         // TESTING URL
@@ -47,7 +50,7 @@ public class HomepageTest extends BaseTest {
         // SHOPPING CART - ICON
         Assert.assertTrue(productsPage.shoppingCartIcon());
     }
-    @Test
+    @Test(priority = 10)
     public void shoppingCartIconShowingCorrectNumber(){
 
         int number = 2;
@@ -56,24 +59,40 @@ public class HomepageTest extends BaseTest {
 
         int actualNumber = productsPage.getCartNumber();
         Assert.assertEquals(actualNumber, number);
+        emptyCart();
 
     }
-    @Test
+    @Test(priority = 15)
     public void userCanAddProducts() {
         productsPage.addRandomProducts(2);
+        emptyCart();
     }
-    @Test
+    @Test(priority = 20)
     public void userCanAddAndRemoveProduct(){
-
         WebElement randomProduct = productsPage.selectRandomProduct();
 
         addOrRemoveProduct("add",randomProduct);
         addOrRemoveProduct("remove",randomProduct);
     }
+    @Test(priority = 100)
+    public void removeAllProductsFromShoppingCart(){
+        productsPage.addRandomProducts(2);
+        emptyCart();
+    }
 
+    public void emptyCart(){
+        productsPage.clickOnShoppingCart();
 
+        List<WebElement> list = driver.findElements(By.className("cart_item_label"));
 
-
+        if (!list.isEmpty()) {
+            for (int i = 0; i < list.size(); i++) {
+                productsPage.clickOnRemoveCartButton();
+            }
+        }
+        WebElement returnToShopping = driver.findElement(By.id("continue-shopping"));
+        returnToShopping.click();
+    }
     public void addOrRemoveProduct(String addOrRemove,WebElement element){
 
         String productText = element.getText();
@@ -87,17 +106,37 @@ public class HomepageTest extends BaseTest {
         WebElement button = driver.findElement(By.id(idText));
 
         if (addOrRemove.equals("add")){
-            Assert.assertTrue(button.isDisplayed());
-            button.click();
 
-            Assert.assertEquals(productsPage.getCartNumber(), 1);
+            Assert.assertTrue(button.isDisplayed());
+
+            int cartNumberBefore;
+
+            if ((productsPage.shoppingCart.getText()).isEmpty()){
+                button.click();
+                Assert.assertEquals(productsPage.getCartNumber(),  1);
+
+            } else {
+                cartNumberBefore = productsPage.getCartNumber();
+                button.click();
+                Assert.assertEquals(productsPage.getCartNumber(), cartNumberBefore + 1);
+            }
+
 
         }else {
             Assert.assertTrue(button.isDisplayed());
             Assert.assertTrue(productsPage.buttonIsHighlighted(button));
 
-            button.click();
-            Assert.assertEquals(productsPage.shoppingCart.getText(), "");
+            int cartNumberBefore = productsPage.getCartNumber();
+
+            if (cartNumberBefore == 1){
+                button.click();
+                Assert.assertEquals(productsPage.shoppingCart.getText(), "");
+            }
+            else {
+                button.click();
+                Assert.assertEquals(productsPage.getCartNumber(), cartNumberBefore - 1);
+            }
+
         }
 
     }

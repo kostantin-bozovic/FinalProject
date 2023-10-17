@@ -2,18 +2,20 @@ package Base;
 
 import Pages.LoginPage;
 import Pages.ProductsPage;
-import Tests.LoginPageTest;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
 import java.io.IOException;
 import java.time.Duration;
+import java.util.ArrayList;
 
 public class BaseTest {
 
@@ -23,6 +25,7 @@ public class BaseTest {
     public ExcelReader excelReader;
     public LoginPage loginPage;
     public ProductsPage productsPage;
+
 
     @BeforeClass
     public void setUp() throws IOException {
