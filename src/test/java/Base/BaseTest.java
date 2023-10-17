@@ -1,6 +1,7 @@
 package Base;
 
 import Pages.BurgerMenu;
+import Pages.CartPage;
 import Pages.LoginPage;
 import Pages.ProductsPage;
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -27,6 +28,7 @@ public class BaseTest {
     public LoginPage loginPage;
     public ProductsPage productsPage;
     public BurgerMenu burgerMenu;
+    public CartPage cartPage;
 
 
 
@@ -42,7 +44,7 @@ public class BaseTest {
         loginPage = new LoginPage();
         productsPage = new ProductsPage();
         burgerMenu = new BurgerMenu();
-
+        cartPage = new CartPage();
     }
 
     @AfterClass

@@ -42,6 +42,9 @@ public class BurgerMenu extends BaseTest {
     public void clickAllItemsOption(){
         allItemsOption.click();
     }
+
+
+
     public void clickAboutOption(){
         aboutOption.click();
     }
@@ -54,4 +57,5 @@ public class BurgerMenu extends BaseTest {
     public void closeBurgerSidebar(){
         closeButton.click();
     }
+
 }

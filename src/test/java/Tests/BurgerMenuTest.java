@@ -1,9 +1,14 @@
 package Tests;
 
 import Base.BaseTest;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.Color;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+
 
 public class BurgerMenuTest extends BaseTest {
 
@@ -95,4 +100,62 @@ public class BurgerMenuTest extends BaseTest {
 
         Assert.assertEquals(actualURl, expectedURl);
     }
+
+    @Test(priority = 40)
+    public void testTextColorChanging() throws InterruptedException {
+        burgerMenu.clickOnBurgerMenuButton();
+
+        // value of color before hovering #18583a, after #3ddc91
+
+        String normalColor = "#18583a";
+        String hoveringColor = "#3ddc91";
+
+        /** TEST FOR ALL ITEMS OPTION */
+
+        // color before
+        Assert.assertEquals(getColorValue(burgerMenu.allItemsOption), normalColor);
+        // mouse movement
+        moveMouseTo(burgerMenu.allItemsOption);
+        // color after
+        Assert.assertEquals(getColorValue(burgerMenu.allItemsOption), hoveringColor);
+
+        /** TEST FOR ABOUT OPTION */
+
+        // test -> move -> test
+        Assert.assertEquals(getColorValue(burgerMenu.aboutOption), normalColor);
+        moveMouseTo(burgerMenu.aboutOption);
+        Assert.assertEquals(getColorValue(burgerMenu.aboutOption), hoveringColor);
+
+        /** TEST FOR LOGOUT OPTION */
+
+        Assert.assertEquals(getColorValue(burgerMenu.logoutOption), normalColor);
+        moveMouseTo(burgerMenu.logoutOption);
+        Assert.assertEquals(getColorValue(burgerMenu.logoutOption), hoveringColor);
+
+        /** TEST FOR LOGOUT OPTION */
+
+        Assert.assertEquals(getColorValue(burgerMenu.resetOption), normalColor);
+        moveMouseTo(burgerMenu.resetOption);
+        Assert.assertEquals(getColorValue(burgerMenu.resetOption), hoveringColor);
+
+        // end close burger sidebar
+        burgerMenu.closeBurgerSidebar();
+    }
+
+
+    public String getColorValue( WebElement element ){
+        String rgbFormat = element.getCssValue("color");
+        return Color.fromString(rgbFormat).asHex();
+    }
+
+    public void moveMouseTo(WebElement element) throws InterruptedException {
+        Actions actions = new Actions(driver);
+
+        Thread.sleep(200);
+        actions.moveToElement(element).build().perform();
+        Thread.sleep(200);
+        actions.moveToElement(element).click();
+    }
+
+
 }
