@@ -18,6 +18,8 @@ public class CartPage extends BaseTest {
 
     @FindBy(css = ".btn.btn_primary.btn_small.btn_inventory")
     public WebElement addToCartButton;
+    @FindBy(css = ".btn.btn_secondary.btn_small.cart_button")
+    public WebElement removeCartButton;
     @FindBy(id = "back-to-products")
     public WebElement backButton;
     @FindBy(id = "shopping_cart_container")
@@ -32,8 +34,36 @@ public class CartPage extends BaseTest {
     public WebElement continueShoppingButton;
     @FindBy(id = "checkout")
     public WebElement checkoutButton;
+    @FindBy(id = "first-name")
+    public WebElement firstnameTextBox;
+    @FindBy(id = "last-name")
+    public WebElement lastnameTextBox;
+    @FindBy(id = "postal-code")
+    public WebElement zipcodeTextBox;
+    @FindBy(id = "continue")
+    public WebElement continueButton;
+    @FindBy(id = "finish")
+    public WebElement finnishButton;
 
 
+    public void clickOnFinnishButton(){
+        finnishButton.click();
+    }
+    public void clickOnContinue(){
+        continueButton.click();
+    }
+    public void enterZipCode(String code){
+        zipcodeTextBox.clear();
+        zipcodeTextBox.sendKeys(code);
+    }
+    public void enterFirstname(String firstname){
+        firstnameTextBox.clear();
+        firstnameTextBox.sendKeys(firstname);
+    }
+    public void enterLastname(String lastname) {
+        lastnameTextBox.clear();
+        lastnameTextBox.sendKeys(lastname);
+    }
     public void clickOnCheckoutButton(){
         checkoutButton.click();
     }
