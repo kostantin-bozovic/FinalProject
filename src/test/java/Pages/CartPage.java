@@ -44,8 +44,19 @@ public class CartPage extends BaseTest {
     public WebElement continueButton;
     @FindBy(id = "finish")
     public WebElement finnishButton;
+    @FindBy(className = "complete-header")
+    public WebElement messageForCompletingOrder;
+    @FindBy(id = "back-to-products")
+    public WebElement backHomeButton;
+    @FindBy(className = "title")
+    public WebElement pageMessage;
 
-
+    public void clickOnBackHomeButton(){
+        backHomeButton.click();
+    }
+    public String messageText(){
+        return messageForCompletingOrder.getText();
+    }
     public void clickOnFinnishButton(){
         finnishButton.click();
     }

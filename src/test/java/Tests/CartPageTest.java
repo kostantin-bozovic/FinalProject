@@ -98,6 +98,25 @@ public class CartPageTest extends BaseTest {
 
         cartPage.clickOnContinue();
         cartPage.clickOnFinnishButton();
+
+        // COMPLETE ORDER MESSAGE
+        String actualMessage = cartPage.messageText();
+        String expectedMessage = "Thank you for your order!";
+
+        Assert.assertEquals(actualMessage, expectedMessage);
+
+        // PAGE TITLE MESSAGE
+        Assert.assertEquals(cartPage.pageMessage.getText(), "Checkout: Complete!");
+
+        // URL
+        String expectedCheckoutURL = "https://www.saucedemo.com/checkout-complete.html";
+        String actualCheckoutURL = driver.getCurrentUrl();
+
+        Assert.assertEquals(actualCheckoutURL, expectedCheckoutURL);
+
+        // BACK BUTTON IS DISPLAYED
+        Assert.assertTrue(cartPage.backHomeButton.isDisplayed());
+
     }
 
 
