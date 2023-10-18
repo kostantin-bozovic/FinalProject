@@ -10,6 +10,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -34,12 +35,15 @@ public class BaseTest {
 
     @BeforeClass
     public void setUp() throws IOException {
+
         WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
+        headlessTest("no");
+
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-
         excelReader = new ExcelReader("src/test/java/TestData.xlsx");
+
+
 
         loginPage = new LoginPage();
         productsPage = new ProductsPage();
@@ -50,11 +54,19 @@ public class BaseTest {
     @AfterClass
     public void tearDown() {
         //driver.manage().deleteAllCookies();
-        //driver.quit();
+        driver.quit();
     }
 
     public void scrollToElement(WebElement element){
         ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", element);
+    }
+
+    public void headlessTest(String option){
+        if (option.equals("yes")) {
+            driver = new ChromeDriver(new ChromeOptions().addArguments("--headless=new"));
+        } else {
+            driver = new ChromeDriver();
+        }
     }
 
     public void validLogin(String sheetName){
