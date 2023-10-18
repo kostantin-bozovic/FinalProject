@@ -50,7 +50,18 @@ public class CartPage extends BaseTest {
     public WebElement backHomeButton;
     @FindBy(className = "title")
     public WebElement pageMessage;
+    @FindBy(className = "app_logo")
+    public WebElement logo;
+    @FindBy(className = "summary_subtotal_label")
+    public WebElement priceTotal;
+    @FindBy(css = ".summary_info_label.summary_total_label")
+    public WebElement total;
+    @FindBy(className = "summary_tax_label")
+    public WebElement tax;
 
+    public String logoText(){
+        return logo.getText();
+    }
     public void clickOnBackHomeButton(){
         backHomeButton.click();
     }
