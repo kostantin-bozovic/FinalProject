@@ -37,13 +37,12 @@ public class BaseTest {
     public void setUp() throws IOException {
 
         WebDriverManager.chromedriver().setup();
+
         headlessTest("no");
 
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         excelReader = new ExcelReader("src/test/java/TestData.xlsx");
-
-
 
         loginPage = new LoginPage();
         productsPage = new ProductsPage();
