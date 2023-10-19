@@ -38,7 +38,7 @@ public class BaseTest {
 
         WebDriverManager.chromedriver().setup();
 
-        headlessTest("no");
+        headlessTest(false);
 
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         wait = new WebDriverWait(driver, Duration.ofSeconds(15));
@@ -55,8 +55,8 @@ public class BaseTest {
         ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", element);
     }
 
-    public void headlessTest(String option){
-        if (option.equals("yes")) {
+    public void headlessTest(boolean option){
+        if (option) {
             driver = new ChromeDriver(new ChromeOptions().addArguments("--headless=new").addArguments("start-maximized"));
         } else {
             driver = new ChromeDriver();
