@@ -18,12 +18,9 @@ git clone https://github.com/kostantin-bozovic/FinalProject.git
 * Apache Maven 5.2.4
 
 ## Executing program
-To run Headless tests, replace "no" with "yes" command, inside @BeforeClass methode on 41 line.<br>
+To run Headless tests, replace "false" with "true" command, inside @BeforeClass methode on 41 line.<br>
 ```
-headlessTest("no");
-```
-```
-headlessTest("yes"); 
+headlessTest(false);
 ```
 To run all test in same time, right-click on "testng.xml" file and click "Run"
 
