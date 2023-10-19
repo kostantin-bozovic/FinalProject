@@ -43,11 +43,6 @@ public class BaseTest {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         excelReader = new ExcelReader("src/test/java/TestData.xlsx");
-
-        loginPage = new LoginPage();
-        productsPage = new ProductsPage();
-        burgerMenu = new BurgerMenu();
-        cartPage = new CartPage();
     }
 
     @AfterClass
@@ -62,7 +57,7 @@ public class BaseTest {
 
     public void headlessTest(String option){
         if (option.equals("yes")) {
-            driver = new ChromeDriver(new ChromeOptions().addArguments("--headless=new"));
+            driver = new ChromeDriver(new ChromeOptions().addArguments("--headless=new").addArguments("start-maximized"));
         } else {
             driver = new ChromeDriver();
         }
@@ -87,5 +82,10 @@ public class BaseTest {
         loginPage.clickOnLoginButton();
     }
 
-
+    public void driverSetUp(){
+        loginPage = new LoginPage(driver);
+        productsPage = new ProductsPage(driver);
+        burgerMenu = new BurgerMenu(driver);
+        cartPage = new CartPage(driver);
+    }
 }

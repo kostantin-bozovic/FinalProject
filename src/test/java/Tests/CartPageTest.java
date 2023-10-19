@@ -11,6 +11,7 @@ public class CartPageTest extends BaseTest {
 
     @BeforeMethod
     public void pageSetUp(){
+        driverSetUp();
         driver.manage().window().maximize();
         driver.navigate().to(URL);
         validLogin("LoginData");

@@ -4,6 +4,8 @@ import Base.BaseTest;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.Color;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -14,6 +16,7 @@ public class BurgerMenuTest extends BaseTest {
 
     @BeforeMethod
     public void pageSetUp(){
+        driverSetUp();
         driver.manage().window().maximize();
         driver.navigate().to(URL);
         validLogin("LoginData");
@@ -56,6 +59,8 @@ public class BurgerMenuTest extends BaseTest {
 
         burgerMenu.clickOnBurgerMenuButton();
         burgerMenu.clickAllItemsOption();
+
+        wait.until(ExpectedConditions.elementToBeClickable(burgerMenu.closeButton));
         burgerMenu.closeBurgerSidebar();
 
         String expectedURl = "https://www.saucedemo.com/inventory.html";
@@ -138,6 +143,7 @@ public class BurgerMenuTest extends BaseTest {
         moveMouseTo(burgerMenu.resetOption);
         Assert.assertEquals(getColorValue(burgerMenu.resetOption), hoveringColor);
 
+        wait.until(ExpectedConditions.elementToBeClickable(burgerMenu.closeButton));
         // end close burger sidebar
         burgerMenu.closeBurgerSidebar();
     }
