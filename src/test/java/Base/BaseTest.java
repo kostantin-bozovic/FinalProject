@@ -19,7 +19,8 @@ import java.time.Duration;
 
 public class BaseTest {
 
-    public static final String URL = "https://www.saucedemo.com/";
+    // Here, I declared web driver, waiter and pages that would be tested
+    public static final String URL = "https://www.saucedemo.com/"; // base URL
     public static WebDriver driver;
     public WebDriverWait wait;
     public ExcelReader excelReader;
@@ -29,12 +30,13 @@ public class BaseTest {
     public CartPage cartPage;
 
 
-
+    // @Before Class method runs before the execution of test methods in a current class
     @BeforeClass
     public void setUp() throws IOException {
 
         WebDriverManager.chromedriver().setup();
 
+        // this methode is mostly used to give tester option for headless testing
         headlessTest(false);
 
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
@@ -48,12 +50,19 @@ public class BaseTest {
         driver.quit();
     }
 
+    // This part of code is mainly used to navigate/ scroll to element on page, used in early stage
     public void scrollToElement(WebElement element){
         ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", element);
     }
 
+    // Made a methode to give tester or another user option for headless testing
     public void headlessTest(boolean option){
         if (option) {
+
+            // after testing burger menu in headless mode, button that was used to close burger menu, fail test for Displaying
+            // After researching I found on Stack Overflow guy that had a same problem, following his advice and researching
+            // found this solution  .addArguments("--headless=new").addArguments("start-maximized")
+
             driver = new ChromeDriver(new ChromeOptions().addArguments("--headless=new").addArguments("start-maximized"));
         } else {
             driver = new ChromeDriver();
@@ -67,7 +76,7 @@ public class BaseTest {
         String validUsername = excelReader.getStringData(sheetName,1,1);
         String validPassword = excelReader.getStringData(sheetName,1,2);
 
-        login(validUsername,validPassword); // Entering values and clicking Login button
+        login(validUsername,validPassword); // Entering values and clicking Login button, def in code below
     }
     public void login(String username,String password){
 
@@ -79,6 +88,7 @@ public class BaseTest {
         loginPage.clickOnLoginButton();
     }
 
+    // made a methode to create new instances of testing pages
     public void driverSetUp(){
         loginPage = new LoginPage(driver);
         homepage = new Homepage(driver);

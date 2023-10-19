@@ -9,9 +9,14 @@ import org.openqa.selenium.support.PageFactory;
 
 public class LoginPage extends BaseTest {
 
+
+    // Constructor for Login Page Class, public modifier with WebDriver parameter
+
     public LoginPage(WebDriver driver){
         PageFactory.initElements(driver, this);
     }
+
+    // POM Locators, covered: className, css, id...
 
     @FindBy(id = "user-name")
     public WebElement usernameTextBox;
@@ -33,7 +38,11 @@ public class LoginPage extends BaseTest {
 
 
 
-    // TODO -> Action -----------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------------------------------
+    // Next two methods are made and used to perform two actions:
+    // 1st. to clean text box from old input, if exist
+    // 2nd. to enter new value, String type
+
 
     public void enterUsername(String username){
         usernameTextBox.clear();
@@ -45,18 +54,24 @@ public class LoginPage extends BaseTest {
         passwordTextBox.sendKeys(password);
     }
 
+    //----------------------------------------------------------------------------------------------------------------------
+    // Next methods are made and used to perform click action on defined buttons
+
     public void clickOnLoginButton(){
         loginButton.click();
     }
-
     public void clickOnErrorButton(){
         errorButton.click();
     }
 
+    //----------------------------------------------------------------------------------------------------------------------
+
+    // Next method is made to check if element is displayed
     public boolean loginSiteLogoVisibility(){
         return loginSiteLogo.isDisplayed();
     }
 
+    // Next method is made and used to return text type of String
     public String getLoginSiteLogoText(){
         return loginSiteLogo.getText();
     }

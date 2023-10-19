@@ -1,6 +1,6 @@
 package Pages;
 
-import Base.BaseTest;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,10 +15,13 @@ import static Base.BaseTest.driver;
 
 public class CartPage  {
 
+    // Constructor for Cart Page Class, public modifier with WebDriver parameter
     public CartPage(WebDriver driver){
         PageFactory.initElements(driver, this);
     }
 
+
+    // POM Locators, covered: className, css, id...
     @FindBy(css = ".btn.btn_primary.btn_small.btn_inventory")
     public WebElement addToCartButton;
     @FindBy(css = ".btn.btn_secondary.btn_small.cart_button")
@@ -62,21 +65,13 @@ public class CartPage  {
     @FindBy(className = "summary_tax_label")
     public WebElement tax;
 
-    public String logoText(){
-        return logo.getText();
-    }
-    public void clickOnBackHomeButton(){
-        backHomeButton.click();
-    }
-    public String messageText(){
-        return messageForCompletingOrder.getText();
-    }
-    public void clickOnFinnishButton(){
-        finnishButton.click();
-    }
-    public void clickOnContinue(){
-        continueButton.click();
-    }
+
+
+    //--------------------------------------------------------------------------------------------------------------------
+    // Next three methods are made and used to perform two actions:
+    // 1st. to clean text box from old input, if exist
+    // 2nd. to enter new value, String type
+
     public void enterZipCode(String code){
         zipcodeTextBox.clear();
         zipcodeTextBox.sendKeys(code);
@@ -89,28 +84,90 @@ public class CartPage  {
         lastnameTextBox.clear();
         lastnameTextBox.sendKeys(lastname);
     }
+    //--------------------------------------------------------------------------------------------------------------------
+    // Next methods are made and used to perform click action on defined buttons
+
     public void clickOnCheckoutButton(){
         checkoutButton.click();
     }
-    public String getCartProductNumber() {return cartButton.getText();}
-    public String getLogoText(){ return siteLogo.getText();}
-    public String getTitleText(){ return pageTitle.getText();}
     public void clickOnCartButton(){cartButton.click();}
     public void clickOnBackButton(){
         backButton.click();
     }
-
     public void clickOnAddToCartButton(){
         addToCartButton.click();
     }
+    public void clickOnContinue(){
+        continueButton.click();
+    }
+    public void clickOnFinnishButton(){
+        finnishButton.click();
+    }
+    public void clickOnBackHomeButton(){
+        backHomeButton.click();
+    }
 
+    //--------------------------------------------------------------------------------------------------------------------
+    // Next methods are made and used to return text type of String
+
+    // message for completing order
+    public String messageText(){
+        return messageForCompletingOrder.getText();
+    }
+
+    // text that return number of products shown on cart icon
+    public String getCartProductNumber() {return cartButton.getText();}
+
+    // return text that Site Logo contains
+    public String getLogoText(){ return siteLogo.getText();}
+
+    // return text from page title
+    public String getTitleText(){ return pageTitle.getText();}
+
+    // return logo text
+    public String logoText(){
+        return logo.getText();
+    }
+
+    //----------------------------------------------------------------------------------------------------------------------
+
+    // Find and collect all products into list of Web Elements
+    // Methode to return size of that list (int type)
+
+    @FindBy(className = "inventory_item")
+    public List<WebElement> listOfProducts;
+    public int numberOfProducts(){
+        return listOfProducts.size();
+    }
+
+    //----------------------------------------------------------------------------------------------------------------------
+
+    // 2 Methods combined, for adding random product inside shopping cart
+
+    // 1st.
+    // Made a method that adds "n", random "unique" products, from the page into the shopping cart
+    // Method made an integer List, that stores the ids of products (unique).
+    // While several added products are less than a defined number of products "n",
+    // the method takes an index (int type) generated from a "Random number generator".
+    // Find the product with the given index and check if that index is already taken, if it's taken skipp,
+    // else add an index of that product to the list of ids, click on the "add" button and return to the product page, to continue
+
+    // 2nd.
+    // Method "Random number generator", creates the object instance "random"
+    // and returns "random" index in the range of 0 to number of products on site
+
+    // Ex. if site have 400 products, id's would go from: 0 to 399 or 1 to 400
+    // randomNumberGenerator(400) now he will return random number from 0 to 400
+
+
+    // 1st.
     public void addRandomProducts(int numberOfProducts){
 
         List<Integer> listOfIndex = new ArrayList<>();
 
         while (listOfIndex.size() < numberOfProducts){
 
-            int index = randomNumberGenerator(6);
+            int index = randomNumberGenerator(numberOfProducts);
 
             WebElement product = driver.findElement(By.id("item_"+index+"_title_link"));
 
@@ -123,7 +180,8 @@ public class CartPage  {
         }
     }
 
-    public int randomNumberGenerator(int size){ // vraca random index od 0 do product.size
+    // 2nd.
+    public int randomNumberGenerator(int size){
         Random random = new Random();
         return random.nextInt(0,size);
     }

@@ -4,7 +4,6 @@ import Base.BaseTest;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.Color;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -32,8 +31,7 @@ public class BurgerMenuTest extends BaseTest {
 
         burgerMenu.clickOnBurgerMenuButton();
 
-        // Sidebar, All Items, About, Logout, Reset App State option and "x" (close) button
-
+        // Sidebar elements: All Items, About, Logout, Reset App State option and "x" (close) button
         Assert.assertTrue(burgerMenu.burgerMenuIsDisplayed());
         Assert.assertTrue(burgerMenu.allItemsOption.isEnabled());
         Assert.assertTrue(burgerMenu.aboutOption.isEnabled());
@@ -41,6 +39,7 @@ public class BurgerMenuTest extends BaseTest {
         Assert.assertTrue(burgerMenu.resetOption.isEnabled());
         Assert.assertTrue(burgerMenu.closeButton.isEnabled());
 
+        // close sidebar
         burgerMenu.closeBurgerSidebar();
     }
 
