@@ -12,9 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class ProductsPage extends BaseTest {
+public class Homepage extends BaseTest {
 
-    public ProductsPage(WebDriver driver){
+    public Homepage(WebDriver driver){
         PageFactory.initElements(driver,this);
     }
 

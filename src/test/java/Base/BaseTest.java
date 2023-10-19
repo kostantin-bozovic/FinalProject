@@ -3,22 +3,19 @@ package Base;
 import Pages.BurgerMenu;
 import Pages.CartPage;
 import Pages.LoginPage;
-import Pages.ProductsPage;
+import Pages.Homepage;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
 import java.io.IOException;
 import java.time.Duration;
-import java.util.ArrayList;
 
 public class BaseTest {
 
@@ -27,7 +24,7 @@ public class BaseTest {
     public WebDriverWait wait;
     public ExcelReader excelReader;
     public LoginPage loginPage;
-    public ProductsPage productsPage;
+    public Homepage homepage;
     public BurgerMenu burgerMenu;
     public CartPage cartPage;
 
@@ -84,7 +81,7 @@ public class BaseTest {
 
     public void driverSetUp(){
         loginPage = new LoginPage(driver);
-        productsPage = new ProductsPage(driver);
+        homepage = new Homepage(driver);
         burgerMenu = new BurgerMenu(driver);
         cartPage = new CartPage(driver);
     }

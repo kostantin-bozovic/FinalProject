@@ -29,63 +29,63 @@ public class HomepageTest extends BaseTest {
         Assert.assertEquals(actualURL, expectedURL);
 
         // TESTING SITE LOGO & TEXT
-        Assert.assertTrue(productsPage.siteLogo.isDisplayed());
+        Assert.assertTrue(homepage.siteLogo.isDisplayed());
 
         String expectedLogoText = "Swag Labs";
-        String actualLogoText = productsPage.getSiteLogoText();
+        String actualLogoText = homepage.getSiteLogoText();
 
         Assert.assertEquals(actualLogoText, expectedLogoText);
 
         // PAGE TITLE
         String expectedPageTitle = "Products";
-        String actualPageTitle = productsPage.getPageTitle();
+        String actualPageTitle = homepage.getPageTitle();
 
         Assert.assertEquals(actualPageTitle, expectedPageTitle);
 
         // SORTING DROPDOWN MENU - ICON
-        Assert.assertTrue(productsPage.dropdownMenu());
+        Assert.assertTrue(homepage.dropdownMenu());
 
         // MENU "BURGER" BUTTON - ICON
-        Assert.assertTrue(productsPage.menuButtonIcon());
+        Assert.assertTrue(homepage.menuButtonIcon());
 
         // SHOPPING CART - ICON
-        Assert.assertTrue(productsPage.shoppingCartIcon());
+        Assert.assertTrue(homepage.shoppingCartIcon());
     }
     @Test(priority = 10)
     public void shoppingCartIconShowingCorrectNumber(){
 
         int number = 2;
 
-        productsPage.addRandomProducts(number);
+        homepage.addRandomProducts(number);
 
-        int actualNumber = productsPage.getCartNumber();
+        int actualNumber = homepage.getCartNumber();
         Assert.assertEquals(actualNumber, number);
         emptyCart();
 
     }
     @Test(priority = 15)
     public void userCanAddProducts() {
-        productsPage.addRandomProducts(2);
+        homepage.addRandomProducts(2);
         emptyCart();
     }
     @Test(priority = 20)
     public void userCanAddAndRemoveProduct(){
-        WebElement randomProduct = productsPage.selectRandomProduct();
+        WebElement randomProduct = homepage.selectRandomProduct();
 
         addOrRemoveProduct("add",randomProduct);
         addOrRemoveProduct("remove",randomProduct);
     }
     @Test(priority = 25)
     public void userCanRemoveAllProductsFromShoppingCart(){
-        productsPage.addRandomProducts(2);
+        homepage.addRandomProducts(2);
         emptyCart();
     }
     @Test(priority = 30)
     public void sortProductsInAlphabeticOrder(){
 
-        productsPage.sortProducts("az");
+        homepage.sortProducts("az");
 
-        List<String> ascNameList = productsPage.collectProductNames();
+        List<String> ascNameList = homepage.collectProductNames();
 
         for (int i = 0; i < ascNameList.size()-1; i++){
 
@@ -98,9 +98,9 @@ public class HomepageTest extends BaseTest {
     @Test(priority = 35)
     public void sortProductsInAlphabeticDescOrder(){
 
-        productsPage.sortProducts("za");
+        homepage.sortProducts("za");
 
-        List<String> ascNameList = productsPage.collectProductNames();
+        List<String> ascNameList = homepage.collectProductNames();
 
         for (int i = 0; i < ascNameList.size()-1; i++){
 
@@ -113,9 +113,9 @@ public class HomepageTest extends BaseTest {
     @Test(priority = 40)
     public void sortProductsByPriceAscending(){
 
-        productsPage.sortProducts("lohi");
+        homepage.sortProducts("lohi");
 
-        List<Double> ascPriceList = productsPage.collectAllPrices();
+        List<Double> ascPriceList = homepage.collectAllPrices();
 
         for (int i = 0; i < ascPriceList.size()-1; i++){
 
@@ -128,9 +128,9 @@ public class HomepageTest extends BaseTest {
     @Test(priority = 45)
     public void sortProductsByPriceDesc(){
 
-        productsPage.sortProducts("hilo");
+        homepage.sortProducts("hilo");
 
-        List<Double> ascPriceList = productsPage.collectAllPrices();
+        List<Double> ascPriceList = homepage.collectAllPrices();
 
         for (int i = 0; i < ascPriceList.size()-1; i++){
 
@@ -143,13 +143,13 @@ public class HomepageTest extends BaseTest {
 
 
     public void emptyCart(){
-        productsPage.clickOnShoppingCart();
+        homepage.clickOnShoppingCart();
 
         List<WebElement> list = driver.findElements(By.className("cart_item_label"));
 
         if (!list.isEmpty()) {
             for (int i = 0; i < list.size(); i++) {
-                productsPage.clickOnRemoveCartButton();
+                homepage.clickOnRemoveCartButton();
             }
         }
         WebElement returnToShopping = driver.findElement(By.id("continue-shopping"));
@@ -173,30 +173,30 @@ public class HomepageTest extends BaseTest {
 
             int cartNumberBefore;
 
-            if ((productsPage.shoppingCart.getText()).isEmpty()){
+            if ((homepage.shoppingCart.getText()).isEmpty()){
                 button.click();
-                Assert.assertEquals(productsPage.getCartNumber(),  1);
+                Assert.assertEquals(homepage.getCartNumber(),  1);
 
             } else {
-                cartNumberBefore = productsPage.getCartNumber();
+                cartNumberBefore = homepage.getCartNumber();
                 button.click();
-                Assert.assertEquals(productsPage.getCartNumber(), cartNumberBefore + 1);
+                Assert.assertEquals(homepage.getCartNumber(), cartNumberBefore + 1);
             }
 
 
         }else {
             Assert.assertTrue(button.isDisplayed());
-            Assert.assertTrue(productsPage.buttonIsHighlighted(button));
+            Assert.assertTrue(homepage.buttonIsHighlighted(button));
 
-            int cartNumberBefore = productsPage.getCartNumber();
+            int cartNumberBefore = homepage.getCartNumber();
 
             if (cartNumberBefore == 1){
                 button.click();
-                Assert.assertEquals(productsPage.shoppingCart.getText(), "");
+                Assert.assertEquals(homepage.shoppingCart.getText(), "");
             }
             else {
                 button.click();
-                Assert.assertEquals(productsPage.getCartNumber(), cartNumberBefore - 1);
+                Assert.assertEquals(homepage.getCartNumber(), cartNumberBefore - 1);
             }
 
         }

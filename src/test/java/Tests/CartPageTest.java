@@ -88,7 +88,7 @@ public class CartPageTest extends BaseTest {
         String expectedURL, actualURL;
 
         fillCart();
-        priceOfCart = productsPage.collectAllPrices().stream().mapToDouble(Double::doubleValue).sum();
+        priceOfCart = homepage.collectAllPrices().stream().mapToDouble(Double::doubleValue).sum();
 
         cartPage.clickOnCheckoutButton();
 
@@ -100,7 +100,7 @@ public class CartPageTest extends BaseTest {
         enterInformation();
         cartPage.clickOnContinue();
 
-        priceOfCartInsideCheckout = productsPage.collectAllPrices().stream().mapToDouble(Double::doubleValue).sum();
+        priceOfCartInsideCheckout = homepage.collectAllPrices().stream().mapToDouble(Double::doubleValue).sum();
 
         // TEST CART PRICE BEFORE AND INSIDE CHECKOUT
         Assert.assertEquals(priceOfCartInsideCheckout, priceOfCart);
@@ -116,7 +116,7 @@ public class CartPageTest extends BaseTest {
         enterInformation();
         cartPage.clickOnContinue();
 
-        priceOfCart = productsPage.collectAllPrices().stream().mapToDouble(Double::doubleValue).sum();
+        priceOfCart = homepage.collectAllPrices().stream().mapToDouble(Double::doubleValue).sum();
 
         itemTotal = Double.parseDouble(cartPage.priceTotal.getText().substring(13));
 
