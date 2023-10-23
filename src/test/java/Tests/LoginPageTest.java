@@ -14,8 +14,6 @@ public class LoginPageTest extends BaseTest {
         driver.navigate().to(URL);
     }
 
-    // TODO -> TESTING -----------------------------------------------------------------
-
     @Test(priority = 5)
     public void pageElementsArePresent(){
 
@@ -60,8 +58,6 @@ public class LoginPageTest extends BaseTest {
 
 
 
-
-    // TODO -> END OF TESTING ----------------------------------------------------------
 
     public void login(String username,String password){
 

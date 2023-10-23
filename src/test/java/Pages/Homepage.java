@@ -22,27 +22,27 @@ public class Homepage extends BaseTest {
 
 
     // POM Locators, covered: className, css, id...
-    @FindBy(className = "app_logo")
+    @FindBy(className = "app_logo") // site logo
     public WebElement siteLogo;
-    @FindBy(className = "title")
+    @FindBy(className = "title") // page title
     public WebElement pageTitle;
-    @FindBy(className = "select_container")
+    @FindBy(className = "select_container") // dropdown menu
     public WebElement sortingDropdownMenu;
-    @FindBy(id = "react-burger-menu-btn")
+    @FindBy(id = "react-burger-menu-btn") // burger menu button
     public WebElement menuButton;
-    @FindBy(id = "shopping_cart_container")
+    @FindBy(id = "shopping_cart_container") // shopping cart icon
     public WebElement shoppingCart;
-    @FindBy(css = ".btn.btn_primary.btn_small.btn_inventory")
+    @FindBy(css = ".btn.btn_primary.btn_small.btn_inventory") // add button
     public WebElement addToCartButton;
-    @FindBy(id = "back-to-products")
+    @FindBy(id = "back-to-products") // back button
     public WebElement backButton;
-    @FindBy(css = ".btn.btn_secondary.btn_small.cart_button")
+    @FindBy(css = ".btn.btn_secondary.btn_small.cart_button") // remove button
     public WebElement removeCartButton;
-    @FindBy(className = "product_sort_container")
+    @FindBy(className = "product_sort_container") // sort container ~ dropdown menu
     public WebElement sortOptions;
-    @FindBy(className = "inventory_item_price")
+    @FindBy(className = "inventory_item_price") // product price
     public List<WebElement> productPrices;
-    @FindBy(className = "inventory_item_name")
+    @FindBy(className = "inventory_item_name") // product name
     public List<WebElement> productNames;
 
 
@@ -74,6 +74,8 @@ public class Homepage extends BaseTest {
 
         String color = button.getCssValue("color");
         String borderColor = button.getCssValue("border");
+
+        // defined color values extracted from CSS
 
         return color.equals("rgba(226, 35, 26, 1)") && borderColor.equals("0.8px solid rgb(226, 35, 26)");
     }

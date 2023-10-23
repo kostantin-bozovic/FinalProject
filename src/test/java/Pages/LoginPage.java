@@ -19,21 +19,21 @@ public class LoginPage extends BaseTest {
     // POM Locators, covered: className, css, id...
 
     @FindBy(id = "user-name")
-    public WebElement usernameTextBox;
+    public WebElement usernameTextBox; // username text box
 
     @FindBy(id = "password")
-    public WebElement passwordTextBox;
+    public WebElement passwordTextBox; // password text box
 
     @FindBy(id = "login-button")
-    public WebElement loginButton;
+    public WebElement loginButton; // login button
 
-    @FindBy(css = ".error-message-container.error")
+    @FindBy(css = ".error-message-container.error") // error message
     public WebElement errorMessage;
 
-    @FindBy(className = "error-button")
+    @FindBy(className = "error-button") // error close button "(X)"
     public WebElement errorButton;
 
-    @FindBy(className = "login_logo")
+    @FindBy(className = "login_logo") // login logo (text)
     public WebElement loginSiteLogo;
 
 

@@ -21,47 +21,47 @@ public class CartPage  {
 
 
     // POM Locators, covered: className, css, id...
-    @FindBy(css = ".btn.btn_primary.btn_small.btn_inventory")
+    @FindBy(css = ".btn.btn_primary.btn_small.btn_inventory") // add to cart button
     public WebElement addToCartButton;
-    @FindBy(css = ".btn.btn_secondary.btn_small.cart_button")
+    @FindBy(css = ".btn.btn_secondary.btn_small.cart_button") // remove from cart, used in testing
     public WebElement removeCartButton;
-    @FindBy(id = "back-to-products")
+    @FindBy(id = "back-to-products") // back button
     public WebElement backButton;
-    @FindBy(id = "shopping_cart_container")
+    @FindBy(id = "shopping_cart_container") // cart button
     public WebElement cartButton;
-    @FindBy(className = "title")
+    @FindBy(className = "title") // page title
     public WebElement pageTitle;
-    @FindBy(className = "app_logo")
+    @FindBy(className = "app_logo") // site logo (text and visibility)
     public WebElement siteLogo;
-    @FindBy(id = "react-burger-menu-btn")
+    @FindBy(id = "react-burger-menu-btn")  // burger icon
     public WebElement burgerIcon;
     @FindBy(id ="continue-shopping")
-    public WebElement continueShoppingButton;
+    public WebElement continueShoppingButton; // continue shopping button
     @FindBy(id = "checkout")
-    public WebElement checkoutButton;
+    public WebElement checkoutButton; // checkout button
     @FindBy(id = "first-name")
-    public WebElement firstnameTextBox;
+    public WebElement firstnameTextBox; // first name text box
     @FindBy(id = "last-name")
-    public WebElement lastnameTextBox;
+    public WebElement lastnameTextBox; // last name text box
     @FindBy(id = "postal-code")
-    public WebElement zipcodeTextBox;
+    public WebElement zipcodeTextBox; // zip code text box
     @FindBy(id = "continue")
-    public WebElement continueButton;
+    public WebElement continueButton; // continue checkout button
     @FindBy(id = "finish")
-    public WebElement finnishButton;
+    public WebElement finnishButton; // finnish button
     @FindBy(className = "complete-header")
-    public WebElement messageForCompletingOrder;
+    public WebElement messageForCompletingOrder; // message for completing order
     @FindBy(id = "back-to-products")
-    public WebElement backHomeButton;
+    public WebElement backHomeButton; // back to home button
     @FindBy(className = "title")
-    public WebElement pageMessage;
-    @FindBy(className = "app_logo")
+    public WebElement pageMessage; // page title
+    @FindBy(className = "app_logo") // app logo
     public WebElement logo;
-    @FindBy(className = "summary_subtotal_label")
+    @FindBy(className = "summary_subtotal_label") // price of products - bill
     public WebElement priceTotal;
-    @FindBy(css = ".summary_info_label.summary_total_label")
+    @FindBy(css = ".summary_info_label.summary_total_label") // total price with tax
     public WebElement total;
-    @FindBy(className = "summary_tax_label")
+    @FindBy(className = "summary_tax_label") // tax on product price
     public WebElement tax;
 
 

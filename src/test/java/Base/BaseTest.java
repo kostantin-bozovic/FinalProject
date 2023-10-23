@@ -50,7 +50,7 @@ public class BaseTest {
         driver.quit();
     }
 
-    // This part of code is mainly used to navigate/ scroll to element on page, used in early stage
+    // This part of code is mainly used to navigate/ scroll to element on page, used in early stage, used in testing
     public void scrollToElement(WebElement element){
         ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", element);
     }

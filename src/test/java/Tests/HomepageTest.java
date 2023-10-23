@@ -212,7 +212,7 @@ public class HomepageTest extends BaseTest {
 
             int cartNumberBefore;
 
-
+            // if cart is empty, next value after adding one element is 1, else next element is: old number + 1 new
             if ((homepage.shoppingCart.getText()).isEmpty()){
                 button.click();
                 Assert.assertEquals(homepage.getCartNumber(),  1);
@@ -231,6 +231,7 @@ public class HomepageTest extends BaseTest {
 
             int cartNumberBefore = homepage.getCartNumber();
 
+            // if cart number is 1, then next element is empty string "", else next element is integer
             if (cartNumberBefore == 1){
                 button.click();
                 Assert.assertEquals(homepage.shoppingCart.getText(), "");

@@ -14,19 +14,19 @@ public class BurgerMenu {
     }
 
     // POM Locators, covered: className, css, id...
-    @FindBy(className = "bm-menu")
+    @FindBy(className = "bm-menu") // icon burger menu
     public WebElement burgerMenu;
-    @FindBy(id = "react-burger-menu-btn")
+    @FindBy(id = "react-burger-menu-btn") // burger button same like menu, just locator is different (for exercise)
     public WebElement burgerButton;
-    @FindBy(id = "inventory_sidebar_link")
+    @FindBy(id = "inventory_sidebar_link")  // all items option
     public WebElement allItemsOption;
-    @FindBy(id = "about_sidebar_link")
+    @FindBy(id = "about_sidebar_link") // about option
     public WebElement aboutOption;
-    @FindBy(id = "logout_sidebar_link")
+    @FindBy(id = "logout_sidebar_link") // logout option
     public WebElement logoutOption;
-    @FindBy(id = "reset_sidebar_link")
+    @FindBy(id = "reset_sidebar_link") // reset option
     public WebElement resetOption;
-    @FindBy(className = "bm-cross-button")
+    @FindBy(className = "bm-cross-button") // close burger menu button "(X)"
     public WebElement closeButton;
 
 
