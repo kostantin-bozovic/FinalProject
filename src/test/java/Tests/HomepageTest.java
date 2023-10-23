@@ -54,24 +54,43 @@ public class HomepageTest extends BaseTest {
     @Test(priority = 10)
     public void shoppingCartIconShowingCorrectNumber(){
 
+        // chose number of product to be added
         int number = 2;
 
         homepage.addRandomProducts(number);
 
+        // number visible on cart icon
         int actualNumber = homepage.getCartNumber();
+
+        // testing by comparing them
         Assert.assertEquals(actualNumber, number);
         emptyCart();
 
     }
     @Test(priority = 15)
     public void userCanAddProducts() {
-        homepage.addRandomProducts(2);
+
+        // chose number of product to be added
+        int number = 3;
+
+        homepage.addRandomProducts(number);
+
+        // number visible on cart icon
+        int actualNumber = homepage.getCartNumber();
+
+        // testing by comparing them
+        Assert.assertEquals(actualNumber, number);
+        emptyCart();
+
         emptyCart();
     }
     @Test(priority = 20)
     public void userCanAddAndRemoveProduct(){
+
+        // method select one random element
         WebElement randomProduct = homepage.selectRandomProduct();
 
+        // this methods testing adding and deleting, Asserts are inside method testing step by step
         addOrRemoveProduct("add",randomProduct);
         addOrRemoveProduct("remove",randomProduct);
     }
@@ -142,14 +161,31 @@ public class HomepageTest extends BaseTest {
     }
 
 
+    // Deleting all products from shopping cart by storing all products in one list
+    // while list contains products, click on remove button
+    // @ Verify if element is removed, and cart icon showing right number
+
     public void emptyCart(){
         homepage.clickOnShoppingCart();
 
+        // Collect all products from cart
         List<WebElement> list = driver.findElements(By.className("cart_item_label"));
 
         if (!list.isEmpty()) {
             for (int i = 0; i < list.size(); i++) {
-                homepage.clickOnRemoveCartButton();
+
+                // number visible on cart icon before removing
+                int cartNumber = homepage.getCartNumber();
+
+                // if cart number is 1, then next element is empty string "", else next element is integer
+                if (cartNumber == 1){
+                    homepage.clickOnRemoveCartButton();
+                    Assert.assertEquals(homepage.shoppingCart.getText(), "");
+                }
+                else {
+                    homepage.clickOnRemoveCartButton();
+                    Assert.assertEquals(homepage.getCartNumber(), cartNumber - 1);
+                }
             }
         }
         WebElement returnToShopping = driver.findElement(By.id("continue-shopping"));
@@ -160,18 +196,22 @@ public class HomepageTest extends BaseTest {
         String productText = element.getText();
         String idText;
 
+        // choosing button add or remove
         if (addOrRemove.equals("add")) idText = "add to cart " + productText;
         else idText = "remove " + productText;
 
+        // made selector name
         idText = idText.replace(" ","-").toLowerCase();
 
         WebElement button = driver.findElement(By.id(idText));
 
+        // Testing steps add or remove
         if (addOrRemove.equals("add")){
 
             Assert.assertTrue(button.isDisplayed());
 
             int cartNumberBefore;
+
 
             if ((homepage.shoppingCart.getText()).isEmpty()){
                 button.click();
@@ -184,7 +224,8 @@ public class HomepageTest extends BaseTest {
             }
 
 
-        }else {
+        }
+        else {
             Assert.assertTrue(button.isDisplayed());
             Assert.assertTrue(homepage.buttonIsHighlighted(button));
 
