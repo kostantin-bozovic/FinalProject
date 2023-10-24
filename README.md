@@ -3,12 +3,19 @@ The final project involved performing both manual and automated tests on the eCo
 </br></br>
 ![primer](https://github.com/kostantin-bozovic/FinalProject/assets/144264798/84da8aa0-1555-49e4-b47e-696f93b12a48)
 
+## Table of Contents
+
+- [Dependencies](#dependencies)
+- [Installation](#installation)
+- [Executing program](#executing-program)
+- [Framework Walkthorugh](#framework-walkthorugh)
+
 ## Dependencies
 * Run on Windows 11 Pro
 * IDE for this project is Intellij Idea Community Edition 2023.2
 * Browser needed is Chrome
 
-## Instalation
+## Installation
 
 Open terminal in IDE and git clone the repository
 ```
